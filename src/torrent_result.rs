@@ -10,7 +10,7 @@ use std::io;
 
 use category::Category;
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct TorrentResult {
     title: Option<String>,
     filename: Option<String>,
@@ -60,7 +60,7 @@ impl TorrentResult {
                 None => Uuid::new_v4().to_string()
             },
         };
-        let filepath: String = format!("{}/{}.magnet", path, filename);
+        let filepath = format!("{}/{}.magnet", path, filename);
         let file = File::create(&filepath);
         if file.is_err() {
             return Err(file.unwrap_err());

@@ -1,5 +1,12 @@
 [package]
 name = "rarbg_api"
+description = "A Rust wrapper for RARBG TorrentAPI"
+repository = "https://github.com/baptistecdr/rarbg_api"
+keywords = ["rarbg_api", "rarbg", "rarbg_wrapper", "rarbg_client", "torrent_api"]
+categories = ["api-bindings"]
+build = false
+publish = false
+license = "MIT"
 version = "0.1.0"
 authors = ["baptistecdr <baptistecdr@users.noreply.github.com>"]
 

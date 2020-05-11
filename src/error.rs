@@ -2,12 +2,11 @@ extern crate serde_derive;
 
 use self::serde_derive::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct Error {
     error: String,
     error_code: u8,
 }
-
 
 impl Error {
     pub fn new(error: String, error_code: u8) -> Self {

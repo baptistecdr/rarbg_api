@@ -5,11 +5,12 @@ use std::collections::HashMap;
 use std::time::{SystemTime};
 use reqwest::blocking::{Client, Response};
 use self::serde_derive::{Deserialize, Serialize};
+use reqwest::Error;
 
-const USER_AGENT: &str = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:73.0) Gecko/20100101 Firefox/73.0";
+use USER_AGENT;
+use ENDPOINT;
 
-
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct Token {
     value: String,
     created_at: SystemTime,
@@ -37,11 +38,11 @@ impl Token {
         }
     }
 
-    fn get(app_id: &str) -> reqwest::blocking::Response {
-        let client = Client::builder()
+    fn get(app_id: &str) -> Response {
+        let client: Client = Client::builder()
             .user_agent(USER_AGENT)
             .build().unwrap();
-        let response: Result<Response, reqwest::Error> = client.get("https://torrentapi.org/pubapi_v2.php")
+        let response: Result<Response, Error> = client.get(ENDPOINT)
             .query(&[("get_token", "get_token")])
             .query(&[("app_id", app_id)])
             .send();

@@ -3,7 +3,7 @@ extern crate serde_derive;
 use self::serde_derive::{Deserialize, Serialize};
 use torrent_result::TorrentResult;
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct TorrentResults {
     torrent_results: Vec<TorrentResult>,
 }

@@ -1,5 +1,5 @@
+#![crate_name = "rarbg_api"]
 extern crate reqwest;
-extern crate serde;
 extern crate serde_json;
 
 use std::thread::sleep;
@@ -28,6 +28,7 @@ use error::Error;
 /* The API has a 1req/2s limit. We take one extra second just to be sure. */
 const REQUEST_TIME_LIMIT: u64 = 3;
 const USER_AGENT: &str = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:73.0) Gecko/20100101 Firefox/73.0";
+const ENDPOINT : &str = "https://torrentapi.org/pubapi_v2.php";
 
 #[derive(Debug)]
 pub struct RarBgApi {
@@ -65,7 +66,7 @@ impl RarBgApi {
             .user_agent(USER_AGENT)
             .build().unwrap();
 
-        let mut request: RequestBuilder = client.get("https://torrentapi.org/pubapi_v2.php")
+        let mut request: RequestBuilder = client.get(ENDPOINT)
             .query(&[("mode", mode.as_string())])
             .query(&[("token", self.token().as_string())])
             .query(&[("app_id", self.app_id())]);
@@ -90,6 +91,7 @@ impl RarBgApi {
             }
 
             if pm.categories().is_some() {
+                // @TODO: Find a better way to do a join
                 let categories = pm.categories().as_ref().unwrap();
                 let mut cat_to_str = String::new();
                 for i in 0..categories.len() {

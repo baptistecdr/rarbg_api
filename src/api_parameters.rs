@@ -3,7 +3,7 @@ use limit::Limit;
 use sort_by::SortBy;
 use format::Format;
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub struct ApiParameters {
     ranked: bool,
     limit: Limit,
