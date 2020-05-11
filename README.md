@@ -15,7 +15,8 @@
 
 ## Description
 This Rust module allows easy interaction with RARBG TorrentAPI.
-In particular, it allows to list or search torrents and to export them into a magnet file.
+
+In particular, it allows to list or search torrents and to export them to a magnet file.
 
 ## Quick start
 **This module is not yet publish on crates.io, but when it will :**
@@ -33,3 +34,9 @@ Have a bug or a feature request? Please first search for existing and closed iss
 Contributions are welcome!
 
 ## Contributors
+
+## Disclaimer
+
+Downloading content that you (don't) have might be illegal in your country.
+
+This is an unofficial rust package.
