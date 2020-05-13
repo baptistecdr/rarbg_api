@@ -1,7 +1,9 @@
 extern crate serde_derive;
 extern crate std;
+extern crate core;
 
 use self::serde_derive::{Deserialize, Serialize};
+use self::core::fmt;
 
 #[derive(Copy, Clone, Serialize, Deserialize, Debug)]
 pub enum Category {
@@ -51,4 +53,10 @@ pub enum Category {
     SoftwarePcIso = 33,
     #[serde(rename = "Games/PS4")]
     GamesPs4 = 53,
+}
+
+impl fmt::Display for Category {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{:?}", self)
+    }
 }

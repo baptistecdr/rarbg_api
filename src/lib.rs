@@ -28,7 +28,7 @@ use error::Error;
 /* The API has a 1req/2s limit. We take one extra second just to be sure. */
 const REQUEST_TIME_LIMIT: u64 = 3;
 const USER_AGENT: &str = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:73.0) Gecko/20100101 Firefox/73.0";
-const ENDPOINT : &str = "https://torrentapi.org/pubapi_v2.php";
+const ENDPOINT: &str = "https://torrentapi.org/pubapi_v2.php";
 
 #[derive(Debug)]
 pub struct RarBgApi {
@@ -91,15 +91,10 @@ impl RarBgApi {
             }
 
             if pm.categories().is_some() {
-                // @TODO: Find a better way to do a join
                 let categories = pm.categories().as_ref().unwrap();
-                let mut cat_to_str = String::new();
-                for i in 0..categories.len() {
-                    let id = categories[i] as usize;
-                    cat_to_str.push_str(&format!("{},", id));
-                }
-                cat_to_str.pop(); // Remove last comma
-                request = request.query(&[("category", cat_to_str)]);
+                let stringified_categories: Vec<String> = categories.iter().map(|c| c.to_string()).collect();
+                let joined_categories = stringified_categories.join(",");
+                request = request.query(&[("category", joined_categories)]);
             }
         }
 
