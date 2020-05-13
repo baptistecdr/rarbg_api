@@ -19,12 +19,26 @@ This Rust module allows easy interaction with RARBG TorrentAPI.
 In particular, it allows to list or search torrents and to export them to a magnet file.
 
 ## Quick start
-**This module is not yet publish on crates.io, but when it will :**
 
 Add this to your `Cargo.toml`:
 ```toml
 [dependencies]
 rarbg_api = "0.1.0"
+```
+### Example
+```rust
+extern crate rarbg_api;
+
+use rarbg_api::RarBgApi;
+
+fn main() {
+    let mut api = RarBgApi::new("my_app_id");
+    let result = api.list(None);
+    match result {
+        Ok(torrent_results) => println!("{:?}", torrent_results.torrents()),
+        Err(reason) => println!("{:?}", reason)
+    }
+}
 ```
 
 ## Bugs and feature requests
