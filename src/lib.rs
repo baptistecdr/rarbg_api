@@ -119,11 +119,11 @@ impl RarBgApi {
         let torrents: Result<TorrentResults, SerdeJsonError> = serde_json::from_str(text.clone().as_str());
         match torrents {
             Ok(torrents) => Ok(torrents),
-            Err(_) => {
+            Err(reason1) => {
                 let api_error: Result<Error, SerdeJsonError> = serde_json::from_str(text.clone().as_str());
                 match api_error {
                     Ok(api_error) => Err(api_error),
-                    Err(reason) => panic!("{}", reason)
+                    Err(reason2) => panic!("First reason: {}. Second reason: {}", reason1, reason2)
                 }
             }
         }

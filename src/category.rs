@@ -35,7 +35,7 @@ pub enum Category {
     TvHdEpisodes = 41,
     #[serde(rename = "TV UHD Episodes")]
     TvUhdEpisodes = 49,
-    #[serde(rename = "Movies/MP3")]
+    #[serde(rename = "Music/MP3")]
     MusicMp3 = 23,
     #[serde(rename = "Movies/FLAC")]
     MusicFlac = 25,
