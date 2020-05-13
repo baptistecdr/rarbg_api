@@ -23,7 +23,7 @@ In particular, it allows to list or search torrents and to export them to a magn
 Add this to your `Cargo.toml`:
 ```toml
 [dependencies]
-rarbg_api = "0.1.0"
+rarbg_api = "0.1.1"
 ```
 ### Example
 ```rust
