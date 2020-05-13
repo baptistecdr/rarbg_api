@@ -83,11 +83,11 @@ impl RarBgApi {
             request = request.query(&[("format", pm.format().as_string())]);
 
             if pm.minimum_seeders().is_some() {
-                request = request.query(&[("minimum_seeders", pm.minimum_seeders().unwrap())]);
+                request = request.query(&[("min_seeders", pm.minimum_seeders().unwrap())]);
             }
 
             if pm.minimum_leechers().is_some() {
-                request = request.query(&[("minimum_leechers", pm.minimum_leechers().unwrap())]);
+                request = request.query(&[("min_leechers", pm.minimum_leechers().unwrap())]);
             }
 
             if pm.categories().is_some() {
