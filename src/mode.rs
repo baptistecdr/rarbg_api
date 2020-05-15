@@ -5,7 +5,7 @@ pub enum Mode {
 }
 
 impl Mode {
-    pub fn as_string(&self) -> &str {
+    pub fn as_str(&self) -> &str {
         match self {
             Mode::Search => "search",
             Mode::List => "list"

@@ -14,7 +14,7 @@ impl Default for SortBy {
 }
 
 impl SortBy {
-    pub fn as_string(&self) -> &str {
+    pub fn as_str(&self) -> &str {
         match self {
             SortBy::Seeders => "seeders",
             SortBy::Leechers => "leechers",

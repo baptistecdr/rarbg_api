@@ -7,11 +7,12 @@ use std::io::Write;
 use self::serde_derive::{Deserialize, Serialize};
 use self::uuid::Uuid;
 use std::io;
+use std::fmt;
 
 use category::Category;
 
 #[derive(Clone, Serialize, Deserialize, Debug)]
-pub struct TorrentResult {
+pub struct Torrent {
     title: Option<String>,
     filename: Option<String>,
     category: Category,
@@ -25,7 +26,7 @@ pub struct TorrentResult {
     info_page: Option<String>,
 }
 
-impl TorrentResult {
+impl Torrent {
     pub fn title(&self) -> &Option<String> { &self.title }
 
     pub fn filename(&self) -> &Option<String> { &self.filename }
@@ -52,7 +53,7 @@ impl TorrentResult {
         &self.info_page
     }
 
-    pub fn export(&self, path: &str) -> Result<String, io::Error> {
+    pub fn export(&self, path: &str) -> Result<(), io::Error> {
         let filename = match self.title() {
             Some(title) => title.clone(),
             None => match self.filename() {
@@ -66,9 +67,14 @@ impl TorrentResult {
             return Err(file.unwrap_err());
         }
         match file.unwrap().write_all(self.download.as_bytes()) {
-            Ok(_) => Ok(format!("{} exported to '{}'.", filename, filepath)),
+            Ok(_) => Ok(()),
             Err(reason) => Err(reason),
         }
     }
 }
 
+impl fmt::Display for Torrent {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{:?}", self)
+    }
+}

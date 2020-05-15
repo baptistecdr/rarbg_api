@@ -23,22 +23,58 @@ In particular, it allows to list or search torrents and to export them to a magn
 Add this to your `Cargo.toml`:
 ```toml
 [dependencies]
-rarbg_api = "0.1.1"
+rarbg_api = "0.2.0"
 ```
-### Example
+### Examples
 ```rust
 extern crate rarbg_api;
 
+use rarbg_api::api_parameters_builder::ApiParametersBuilder;
 use rarbg_api::RarBgApi;
+use rarbg_api::limit::Limit;
+use rarbg_api::category::Category;
+use rarbg_api::sort_by::SortBy;
 
 fn main() {
     let mut api = RarBgApi::new("my_app_id");
-    let result = api.list(None);
+    let parameters = ApiParametersBuilder::new()
+        .limit(Limit::TwentyFive)
+        .categories(vec![Category::TvUhdEpisodes, Category::TvHdEpisodes, Category::TvEpisodes])
+        .sort_by(SortBy::Seeders)
+        .build();
+    let result = api.list(Some(&parameters));
     match result {
-        Ok(torrent_results) => println!("{:?}", torrent_results.torrents()),
-        Err(reason) => println!("{:?}", reason)
+        // Export all torrents found in the current directory.
+        // Each file contains a magnet link that can be add in your Bittorrent client.
+        Ok(result) => result.torrents().iter().for_each(|t| t.export(".").unwrap()),
+        Err(reason) => println!("{}", reason.error())
     }
 }
+```
+```rust
+extern crate rarbg_api;
+
+use rarbg_api::api_parameters_builder::ApiParametersBuilder;
+use rarbg_api::RarBgApi;
+use rarbg_api::limit::Limit;
+use rarbg_api::category::Category;
+use rarbg_api::sort_by::SortBy;
+
+fn main() {
+    let mut api = RarBgApi::new("my_app_id");
+    let parameters = ApiParametersBuilder::new()
+        .limit(Limit::TwentyFive)
+        .categories(vec![Category::TvUhdEpisodes, Category::TvHdEpisodes, Category::TvEpisodes])
+        .sort_by(SortBy::Seeders)
+        .build();
+    let result = api.search("Rick and Morty", Some(&parameters));
+    match result {
+        // Export first torrent found in the current directory.
+        Ok(result) => result.torrents().iter().take(1).for_each(|t| t.export(".").unwrap()),
+        Err(reason) => println!("{}", reason.error())
+    }
+}
+
 ```
 
 ## Bugs and feature requests

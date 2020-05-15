@@ -5,13 +5,13 @@ use format::Format;
 
 #[derive(Clone, Debug)]
 pub struct ApiParameters {
-    ranked: bool,
-    limit: Limit,
-    categories: Option<Vec<Category>>,
-    sort_by: SortBy,
-    minimum_seeders: Option<usize>,
-    minimum_leechers: Option<usize>,
-    format: Format,
+    pub(crate) ranked: bool,
+    pub(crate) limit: Limit,
+    pub(crate) categories: Option<Vec<Category>>,
+    pub(crate) sort_by: SortBy,
+    pub(crate) minimum_seeders: Option<usize>,
+    pub(crate) minimum_leechers: Option<usize>,
+    pub(crate) format: Format,
 }
 
 impl ApiParameters {
@@ -39,17 +39,5 @@ impl ApiParameters {
 
     pub fn format(&self) -> &Format {
         &self.format
-    }
-
-    pub fn new(ranked: Option<bool>, limit: Option<Limit>, categories: Option<Vec<Category>>, sort_by: Option<SortBy>, minimum_seeders: Option<usize>, minimum_leechers: Option<usize>, format: Option<Format>) -> Self {
-        ApiParameters {
-            ranked: ranked.unwrap_or_default(),
-            limit: limit.unwrap_or_default(),
-            categories,
-            sort_by: sort_by.unwrap_or_default(),
-            minimum_seeders,
-            minimum_leechers,
-            format: format.unwrap_or_default()
-        }
     }
 }

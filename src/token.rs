@@ -68,7 +68,7 @@ impl Token {
         }
     }
 
-    pub fn as_string(&self) -> &String {
-        self.value()
+    pub fn as_str(&self) -> &str {
+        self.value().as_str()
     }
 }

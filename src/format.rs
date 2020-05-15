@@ -8,15 +8,15 @@ pub enum Format {
     JsonExtended,
 }
 
+impl Default for Format {
+    fn default() -> Self { Format::Json }
+}
+
 impl Format {
-    pub fn as_string(&self) -> &str {
+    pub fn as_str(&self) -> &str {
         match self {
             Format::Json => "json",
             Format::JsonExtended => "json_extended"
         }
     }
-}
-
-impl Default for Format {
-    fn default() -> Self { Format::Json }
 }

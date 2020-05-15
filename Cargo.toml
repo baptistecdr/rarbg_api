@@ -8,7 +8,7 @@ build = false
 publish = ["crates-io"]
 exclude = [".idea", "src/main.rs"]
 license = "MIT"
-version = "0.1.1"
+version = "0.2.0"
 authors = ["baptistecdr <baptistecdr@users.noreply.github.com>"]
 
 [dependencies]

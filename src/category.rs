@@ -3,60 +3,83 @@ extern crate std;
 extern crate core;
 
 use self::serde_derive::{Deserialize, Serialize};
-use self::core::fmt;
 
 #[derive(Copy, Clone, Serialize, Deserialize, Debug)]
 pub enum Category {
     #[serde(rename = "XXX (18+)")]
-    Xxx = 4,
+    Xxx,
     #[serde(rename = "Movies/XVID")]
-    MoviesXvid = 14,
+    MoviesXvid,
     #[serde(rename = "Movies/XVID/720")]
-    MoviesXvid720 = 48,
+    MoviesXvid720,
     #[serde(rename = "Movies/x264")]
-    MoviesX264 = 17,
+    MoviesX264,
     #[serde(rename = "Movies/x264/1080")]
-    MoviesX2641080 = 44,
+    MoviesX2641080,
     #[serde(rename = "Movies/x264/720")]
-    MoviesX264720 = 45,
+    MoviesX264720,
     #[serde(rename = "Movies/x264/3D")]
-    MoviesX2643d = 47,
+    MoviesX2643d,
     #[serde(rename = "Movies/x264/4k")]
-    MoviesX2644k = 50,
+    MoviesX2644k,
     #[serde(rename = "Movies/x265/4k")]
-    MoviesX2654k = 51,
+    MoviesX2654k,
     #[serde(rename = "Movies/x264/4k/HDR")]
-    MoviesX2654kHdr = 52,
+    MoviesX2654kHdr,
     #[serde(rename = "Movies/Full BD")]
-    MoviesFullBd = 42,
+    MoviesFullBd,
     #[serde(rename = "Movies/BD Remux")]
-    MoviesBdRemux = 46,
+    MoviesBdRemux,
     #[serde(rename = "TV Episodes")]
-    TvEpisodes = 18,
+    TvEpisodes,
     #[serde(rename = "TV HD Episodes")]
-    TvHdEpisodes = 41,
+    TvHdEpisodes,
     #[serde(rename = "TV UHD Episodes")]
-    TvUhdEpisodes = 49,
+    TvUhdEpisodes,
     #[serde(rename = "Music/MP3")]
-    MusicMp3 = 23,
+    MusicMp3,
     #[serde(rename = "Music/FLAC")]
-    MusicFlac = 25,
+    MusicFlac,
     #[serde(rename = "Games/PC ISO")]
-    GamesPcIso = 27,
+    GamesPcIso,
     #[serde(rename = "Games/PC RIP")]
-    GamesPcRip = 28,
+    GamesPcRip,
     #[serde(rename = "Games/PS3")]
-    GamesPs3 = 40,
+    GamesPs3,
     #[serde(rename = "Games/XBOX-360")]
-    GamesXbox360 = 32,
+    GamesXbox360,
     #[serde(rename = "Software/PC ISO")]
-    SoftwarePcIso = 33,
+    SoftwarePcIso,
     #[serde(rename = "Games/PS4")]
-    GamesPs4 = 53,
+    GamesPs4,
 }
 
-impl fmt::Display for Category {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{:?}", self)
+impl Category {
+    pub fn as_str(&self) -> &str {
+        match self {
+            Category::Xxx => "4",
+            Category::MoviesXvid => "14",
+            Category::MoviesXvid720 => "48",
+            Category::MoviesX264 => "17",
+            Category::MoviesX2641080 => "44",
+            Category::MoviesX264720 => "45",
+            Category::MoviesX2643d => "47",
+            Category::MoviesX2644k => "50",
+            Category::MoviesX2654k => "51",
+            Category::MoviesX2654kHdr => "52",
+            Category::MoviesFullBd => "42",
+            Category::MoviesBdRemux => "46",
+            Category::TvEpisodes => "18",
+            Category::TvHdEpisodes => "41",
+            Category::TvUhdEpisodes => "49",
+            Category::MusicMp3 => "23",
+            Category::MusicFlac => "25",
+            Category::GamesPcIso => "27",
+            Category::GamesPcRip => "28",
+            Category::GamesPs3 => "40",
+            Category::GamesXbox360 => "32",
+            Category::SoftwarePcIso => "33",
+            Category::GamesPs4 => "53",
+        }
     }
 }
