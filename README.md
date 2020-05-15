@@ -69,8 +69,8 @@ fn main() {
         .build();
     let result = api.search("Rick and Morty", Some(&parameters));
     match result {
-        // Export all torrents found in the current directory.
-        // Each file contains a magnet link that can be add in your Bittorrent client.
+        // Export first torrent found in the current directory.
+        // The file contains a magnet link that can be add in your Bittorrent client.
         Ok(result) => result.torrents().iter().take(1).for_each(|t| println!("Torrent exported to '{}'.", t.export(".").unwrap())),
         Err(reason) => println!("{}", reason.error())
     }
@@ -84,6 +84,7 @@ Have a bug or a feature request? Please first search for existing and closed iss
 Contributions are welcome!
 
 ## Contributors
+* [Orestis](https://github.com/omalaspinas) for his feedback
 
 ## Disclaimer
 
