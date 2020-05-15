@@ -53,7 +53,7 @@ impl Torrent {
         &self.info_page
     }
 
-    pub fn export(&self, path: &str) -> Result<(), io::Error> {
+    pub fn export(&self, path: &str) -> Result<String, io::Error> {
         let filename = match self.title() {
             Some(title) => title.clone(),
             None => match self.filename() {
@@ -67,7 +67,7 @@ impl Torrent {
             return Err(file.unwrap_err());
         }
         match file.unwrap().write_all(self.download.as_bytes()) {
-            Ok(_) => Ok(()),
+            Ok(_) => Ok(filepath),
             Err(reason) => Err(reason),
         }
     }

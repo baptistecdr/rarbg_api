@@ -23,7 +23,7 @@ In particular, it allows to list or search torrents and to export them to a magn
 Add this to your `Cargo.toml`:
 ```toml
 [dependencies]
-rarbg_api = "0.2.0"
+rarbg_api = "0.3.0"
 ```
 ### Examples
 ```rust
@@ -46,7 +46,7 @@ fn main() {
     match result {
         // Export all torrents found in the current directory.
         // Each file contains a magnet link that can be add in your Bittorrent client.
-        Ok(result) => result.torrents().iter().for_each(|t| t.export(".").unwrap()),
+        Ok(result) => result.torrents().iter().for_each(|t| println!("Torrent exported to '{}'.", t.export(".").unwrap())),
         Err(reason) => println!("{}", reason.error())
     }
 }
@@ -69,12 +69,12 @@ fn main() {
         .build();
     let result = api.search("Rick and Morty", Some(&parameters));
     match result {
-        // Export first torrent found in the current directory.
-        Ok(result) => result.torrents().iter().take(1).for_each(|t| t.export(".").unwrap()),
+        // Export all torrents found in the current directory.
+        // Each file contains a magnet link that can be add in your Bittorrent client.
+        Ok(result) => result.torrents().iter().take(1).for_each(|t| println!("Torrent exported to '{}'.", t.export(".").unwrap())),
         Err(reason) => println!("{}", reason.error())
     }
 }
-
 ```
 
 ## Bugs and feature requests
