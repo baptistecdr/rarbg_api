@@ -10,8 +10,8 @@ pub struct ApiParametersBuilder {
     limit: Limit,
     categories: Option<Vec<Category>>,
     sort_by: SortBy,
-    minimum_seeders: Option<usize>,
-    minimum_leechers: Option<usize>,
+    minimum_seeders: Option<u32>,
+    minimum_leechers: Option<u32>,
     format: Format,
 }
 
@@ -81,7 +81,7 @@ impl ApiParametersBuilder {
     ///
     /// let apb = ApiParametersBuilder::new().minimum_seeders(42);
     /// ```
-    pub fn minimum_seeders(&mut self, minimum_seeders: usize) -> &mut ApiParametersBuilder {
+    pub fn minimum_seeders(&mut self, minimum_seeders: u32) -> &mut ApiParametersBuilder {
         self.minimum_seeders = Some(minimum_seeders);
         self
     }
@@ -94,7 +94,7 @@ impl ApiParametersBuilder {
     ///
     /// let apb = ApiParametersBuilder::new().minimum_leechers(42);
     /// ```
-    pub fn minimum_leechers(&mut self, minimum_leechers: usize) -> &mut ApiParametersBuilder {
+    pub fn minimum_leechers(&mut self, minimum_leechers: u32) -> &mut ApiParametersBuilder {
         self.minimum_leechers = Some(minimum_leechers);
         self
     }

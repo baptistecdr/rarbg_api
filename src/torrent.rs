@@ -7,12 +7,14 @@ use std::io;
 use std::io::Write;
 
 use chrono::{DateTime, Utc};
+use serde::{Deserialize, Deserializer};
+use serde::de::{Error, Unexpected};
 
 use category::Category;
+use episode_info::EpisodeInfo;
 
 use self::serde_derive::{Deserialize, Serialize};
 use self::uuid::Uuid;
-use episode_info::EpisodeInfo;
 
 #[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct Torrent {
@@ -20,12 +22,13 @@ pub struct Torrent {
     filename: Option<String>,
     category: Category,
     download: String,
-    seeders: Option<i64>,
-    leechers: Option<i64>,
-    size: Option<i64>,
+    seeders: Option<u32>,
+    leechers: Option<u32>,
+    size: Option<u128>,
     pubdate: Option<DateTime<Utc>>,
     episode_info: Option<EpisodeInfo>,
-    ranked: Option<i64>,
+    #[serde(default, deserialize_with = "bool_from_int")]
+    ranked: Option<bool>,
     info_page: Option<String>,
 }
 
@@ -51,21 +54,21 @@ impl Torrent {
     /// Return the number of seeders available.
     ///
     /// Only available when `format` is set to `Format::JsonExtended`.
-    pub fn seeders(&self) -> &Option<i64> {
+    pub fn seeders(&self) -> &Option<u32> {
         &self.seeders
     }
 
     /// Return the number of leechers.
     ///
     /// Only available when `format` is set to `Format::JsonExtended`.
-    pub fn leechers(&self) -> &Option<i64> {
+    pub fn leechers(&self) -> &Option<u32> {
         &self.leechers
     }
 
     /// Return the size in bytes.
     ///
     /// Only available when `format` is set to `Format::JsonExtended`.
-    pub fn size(&self) -> &Option<i64> {
+    pub fn size(&self) -> &Option<u128> {
         &self.size
     }
 
@@ -88,7 +91,7 @@ impl Torrent {
     /// Return true if it's a scene, rarbg or rartv releases, otherwise false.
     ///
     /// Only available when `format` is set to `Format::JsonExtended`.
-    pub fn ranked(&self) -> &Option<i64> {
+    pub fn ranked(&self) -> &Option<bool> {
         &self.ranked
     }
 
@@ -128,5 +131,17 @@ impl Torrent {
 impl fmt::Display for Torrent {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{:?}", self)
+    }
+}
+
+// https://github.com/serde-rs/serde/issues/1344#issuecomment-410309140
+fn bool_from_int<'de, D>(deserializer: D) -> Result<Option<bool>, D::Error> where D: Deserializer<'de>, {
+    match u8::deserialize(deserializer)? {
+        0 => Ok(Some(false)),
+        1 => Ok(Some(true)),
+        other => Err(Error::invalid_value(
+            Unexpected::Unsigned(other as u64),
+            &"zero or one",
+        )),
     }
 }

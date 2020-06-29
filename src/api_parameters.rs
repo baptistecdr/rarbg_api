@@ -9,8 +9,8 @@ pub struct ApiParameters {
     pub(crate) limit: Limit,
     pub(crate) categories: Option<Vec<Category>>,
     pub(crate) sort_by: SortBy,
-    pub(crate) minimum_seeders: Option<usize>,
-    pub(crate) minimum_leechers: Option<usize>,
+    pub(crate) minimum_seeders: Option<u32>,
+    pub(crate) minimum_leechers: Option<u32>,
     pub(crate) format: Format,
 }
 
@@ -35,12 +35,12 @@ impl ApiParameters {
     pub fn sort_by(&self) -> &SortBy { &self.sort_by }
 
     /// Return the number of minimum seeders that a torrent will have.
-    pub fn minimum_seeders(&self) -> &Option<usize> {
+    pub fn minimum_seeders(&self) -> &Option<u32> {
         &self.minimum_seeders
     }
 
     /// Return the number of minimum leechers that a torrent will have.
-    pub fn minimum_leechers(&self) -> &Option<usize> {
+    pub fn minimum_leechers(&self) -> &Option<u32> {
         &self.minimum_leechers
     }
 

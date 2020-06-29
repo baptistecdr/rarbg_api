@@ -1,6 +1,7 @@
 #![crate_name = "rarbg_api"]
 extern crate chrono;
 extern crate reqwest;
+extern crate serde;
 extern crate serde_json;
 
 use std::thread::sleep;

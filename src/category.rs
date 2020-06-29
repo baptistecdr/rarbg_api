@@ -52,6 +52,8 @@ pub enum Category {
     SoftwarePcIso,
     #[serde(rename = "Games/PS4")]
     GamesPs4,
+    #[serde(rename = "e-Books")]
+    Ebooks
 }
 
 impl Category {
@@ -80,6 +82,7 @@ impl Category {
             Category::GamesXbox360 => "32",
             Category::SoftwarePcIso => "33",
             Category::GamesPs4 => "53",
+            Category::Ebooks => "35"
         }
     }
 }
