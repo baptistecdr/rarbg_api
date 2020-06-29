@@ -1,12 +1,20 @@
 #![crate_name = "rarbg_api"]
+extern crate chrono;
 extern crate reqwest;
 extern crate serde_json;
 
 use std::thread::sleep;
 use std::time::Duration;
-use serde_json::{Error as SerdeJsonError};
-use reqwest::blocking::{Client, Response, RequestBuilder};
+
+use reqwest::blocking::{Client, RequestBuilder, Response};
 use reqwest::Error as ReqwestError;
+use serde_json::Error as SerdeJsonError;
+
+use api_parameters::ApiParameters;
+use error::Error;
+use mode::Mode;
+use token::Token;
+use torrents::Torrents;
 
 pub mod category;
 pub mod token;
@@ -20,12 +28,6 @@ pub mod sort_by;
 pub mod error;
 pub mod api_parameters_builder;
 
-use api_parameters::ApiParameters;
-use mode::Mode;
-use token::Token;
-use torrents::Torrents;
-use error::Error;
-
 /* The API has a 1req/2s limit. We take one extra second just to be sure. */
 const REQUEST_TIME_LIMIT: u64 = 3;
 const USER_AGENT: &str = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:73.0) Gecko/20100101 Firefox/73.0";
@@ -38,10 +40,28 @@ pub struct RarBgApi {
 }
 
 impl RarBgApi {
+    /// Return the name of you app.
+    ///
+    /// # Example
+    /// ```
+    /// use rarbg_api::RarBgApi;
+    /// let api = RarBgApi::new("example");
+    /// assert_eq!("example", api.app_id())
+    /// ```
     pub fn app_id(&self) -> &str {
-        &self.app_id
+        &self.app_id.as_str()
     }
 
+    /// Return the token associate to your app.
+    ///
+    /// # Example
+    /// ```
+    /// use rarbg_api::RarBgApi;
+    /// use rarbg_api::token::Token;
+    ///
+    /// let api = RarBgApi::new("example");
+    /// let token: &Token = api.token();
+    /// ```
     pub fn token(&self) -> &Token {
         &self.token
     }
@@ -51,10 +71,6 @@ impl RarBgApi {
             token: Token::new(app_id),
             app_id: app_id.to_string(),
         }
-    }
-
-    pub fn list(&mut self, parameters: Option<&ApiParameters>) -> Result<Torrents, Error> {
-        self.request(None, Mode::List, parameters)
     }
 
     fn request(&mut self, search_value: Option<&[(&str, &str)]>, mode: Mode, parameters: Option<&ApiParameters>) -> Result<Torrents, Error> {
@@ -69,7 +85,7 @@ impl RarBgApi {
 
         let mut request: RequestBuilder = client.get(ENDPOINT)
             .query(&[("mode", mode.as_str())])
-            .query(&[("token", self.token().as_str())])
+            .query(&[("token", self.token().value())])
             .query(&[("app_id", self.app_id())]);
 
         if search_value.is_some() {
@@ -123,18 +139,66 @@ impl RarBgApi {
         }
     }
 
+    /// List the torrents avalaible depending on parameters given.
+    ///
+    /// # Example
+    /// ```
+    /// use rarbg_api::RarBgApi;
+    /// let mut api = RarBgApi::new("example");
+    /// // It will get the 25 last ranked torrents
+    /// let result = api.list(None);
+    /// ```
+    pub fn list(&mut self, parameters: Option<&ApiParameters>) -> Result<Torrents, Error> {
+        self.request(None, Mode::List, parameters)
+    }
+
+    /// Search torrents by its name with some or no parameters.
+    ///
+    /// # Example
+    /// ```
+    /// use rarbg_api::RarBgApi;
+    /// let mut api = RarBgApi::new("example");
+    /// let result = api.search("Rick and Morty", None);
+    /// ```
     pub fn search(&mut self, value: &str, parameters: Option<&ApiParameters>) -> Result<Torrents, Error> {
         self.request(Some(&[("search_string", value)]), Mode::Search, parameters)
     }
 
+    /// Search torrents by its IMDB id with some or no parameters.
+    ///
+    /// # Example
+    /// ```
+    /// use rarbg_api::RarBgApi;
+    /// let mut api = RarBgApi::new("example");
+    /// // tt2861424 is Rick and Morty
+    /// let result = api.search_by_imdb("tt2861424", None);
+    /// ```
     pub fn search_by_imdb(&mut self, value: &str, parameters: Option<&ApiParameters>) -> Result<Torrents, Error> {
         self.request(Some(&[("search_imdb", value)]), Mode::Search, parameters)
     }
 
+    /// Search torrents by its TVDB id with some or no parameters.
+    ///
+    /// # Example
+    /// ```
+    /// use rarbg_api::RarBgApi;
+    /// let mut api = RarBgApi::new("example");
+    /// // 275274 is Rick and Morty
+    /// let result = api.search_by_tvdb("275274", None);
+    /// ```
     pub fn search_by_tvdb(&mut self, value: &str, parameters: Option<&ApiParameters>) -> Result<Torrents, Error> {
         self.request(Some(&[("search_tvdb", value)]), Mode::Search, parameters)
     }
 
+    /// Search torrents by its TMDB id with some or no parameters.
+    ///
+    /// # Example
+    /// ```
+    /// use rarbg_api::RarBgApi;
+    /// let mut api = RarBgApi::new("example");
+    /// // 60625 is Rick and Morty
+    /// let result = api.search_by_tmdb("60625", None);
+    /// ```
     pub fn search_by_tmdb(&mut self, value: &str, parameters: Option<&ApiParameters>) -> Result<Torrents, Error> {
         self.request(Some(&[("search_tmdb", value)]), Mode::Search, parameters)
     }

@@ -1,6 +1,6 @@
+extern crate core;
 extern crate serde_derive;
 extern crate std;
-extern crate core;
 
 use self::serde_derive::{Deserialize, Serialize};
 

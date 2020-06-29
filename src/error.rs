@@ -9,17 +9,12 @@ pub struct Error {
 }
 
 impl Error {
-    pub fn new(error: String, error_code: u8) -> Self {
-        Error {
-            error,
-            error_code,
-        }
+    /// Return the description of the error given by the API.
+    pub fn error(&self) -> &str {
+        return self.error.as_str();
     }
 
-    pub fn error(&self) -> &String {
-        return &self.error;
-    }
-
+    /// Return the error code given by the API.
     pub fn error_code(&self) -> &u8 {
         return &self.error_code;
     }

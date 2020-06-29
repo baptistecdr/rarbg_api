@@ -1,7 +1,8 @@
 extern crate serde_derive;
 
-use self::serde_derive::{Deserialize, Serialize};
 use torrent::Torrent;
+
+use self::serde_derive::{Deserialize, Serialize};
 
 #[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct Torrents {
@@ -9,13 +10,8 @@ pub struct Torrents {
 }
 
 impl Torrents {
+    /// Return a list of torrents.
     pub fn torrents(&self) -> &Vec<Torrent> {
         &self.torrent_results
-    }
-
-    pub fn new(torrent_results: Vec<Torrent>) -> Self {
-        Torrents {
-            torrent_results
-        }
     }
 }

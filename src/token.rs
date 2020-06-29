@@ -2,13 +2,15 @@ extern crate reqwest;
 extern crate serde_derive;
 
 use std::collections::HashMap;
-use std::time::{SystemTime};
+use std::time::SystemTime;
+
 use reqwest::blocking::{Client, Response};
-use self::serde_derive::{Deserialize, Serialize};
 use reqwest::Error;
 
-use USER_AGENT;
 use ENDPOINT;
+use USER_AGENT;
+
+use self::serde_derive::{Deserialize, Serialize};
 
 #[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct Token {
@@ -17,14 +19,41 @@ pub struct Token {
 }
 
 impl Token {
-    pub fn value(&self) -> &String {
-        &self.value
+    /// Return the value of the token obtained from the API.
+    ///
+    /// # Example
+    /// ```
+    /// use rarbg_api::token::Token;
+    /// let token = Token::new("example");
+    /// let value = token.value();
+    /// ```
+    pub fn value(&self) -> &str {
+        self.value.as_str()
     }
 
+    /// Returns the time when the token was created.
+    ///
+    /// # Example
+    /// ```
+    /// use rarbg_api::token::Token;
+    /// let token = Token::new("example");
+    /// let time_of_creation = token.created_at();
+    /// ```
     pub fn created_at(&self) -> &SystemTime {
         &self.created_at
     }
 
+    /// Create a Token with the value obtained from the API.
+    /// This token can be use to make requests to the API.
+    /// # Panics
+    ///
+    /// Panics if a token cannot be retrieve from the API.
+    ///
+    /// # Example
+    /// ```
+    /// use rarbg_api::token::Token;
+    /// let token = Token::new("example");
+    /// ```
     pub fn new(app_id: &str) -> Self {
         let response = Token::get(app_id);
         let content = Token::parse(response);
@@ -59,6 +88,15 @@ impl Token {
         }
     }
 
+    /// Verifies that the token is still valid to use it with the API.
+    /// Officially, a token is valid for 15 minutes but we keep this token valid for 10 minutes.
+    ///
+    /// # Example
+    /// ```
+    /// use rarbg_api::token::Token;
+    /// let token = Token::new("example");
+    /// assert!(token.is_valid(), "Token should be valid !");
+    /// ```
     pub fn is_valid(&self) -> bool {
         let sys_time = SystemTime::now();
         let difference = sys_time.duration_since(self.created_at);
@@ -66,9 +104,5 @@ impl Token {
             Ok(duration) => duration.as_secs() as f64 + f64::from(duration.subsec_nanos()) * 1e-9 < 600.0, // < 10 min
             Err(_) => false
         }
-    }
-
-    pub fn as_str(&self) -> &str {
-        self.value().as_str()
     }
 }

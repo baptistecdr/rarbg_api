@@ -11,7 +11,7 @@
 - [Quick start](#quick-start)
 - [Bugs and feature requests](#bugs-and-feature-requests)
 - [Contributing](#contributing)
-- [Contibutors](#contributors)
+- [Contributors](#contributors)
 
 ## Description
 This Rust module allows easy interaction with RARBG TorrentAPI.
@@ -30,9 +30,9 @@ rarbg_api = "0.3.0"
 extern crate rarbg_api;
 
 use rarbg_api::api_parameters_builder::ApiParametersBuilder;
-use rarbg_api::RarBgApi;
-use rarbg_api::limit::Limit;
 use rarbg_api::category::Category;
+use rarbg_api::limit::Limit;
+use rarbg_api::RarBgApi;
 use rarbg_api::sort_by::SortBy;
 
 fn main() {
@@ -55,9 +55,9 @@ fn main() {
 extern crate rarbg_api;
 
 use rarbg_api::api_parameters_builder::ApiParametersBuilder;
-use rarbg_api::RarBgApi;
-use rarbg_api::limit::Limit;
 use rarbg_api::category::Category;
+use rarbg_api::limit::Limit;
+use rarbg_api::RarBgApi;
 use rarbg_api::sort_by::SortBy;
 
 fn main() {
