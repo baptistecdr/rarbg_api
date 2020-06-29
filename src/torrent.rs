@@ -1,7 +1,6 @@
 extern crate serde_derive;
 extern crate uuid;
 
-use std::collections::HashMap;
 use std::fmt;
 use std::fs::File;
 use std::io;
@@ -13,6 +12,7 @@ use category::Category;
 
 use self::serde_derive::{Deserialize, Serialize};
 use self::uuid::Uuid;
+use episode_info::EpisodeInfo;
 
 #[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct Torrent {
@@ -24,7 +24,7 @@ pub struct Torrent {
     leechers: Option<i64>,
     size: Option<i64>,
     pubdate: Option<DateTime<Utc>>,
-    episode_info: Option<HashMap<String, Option<String>>>,
+    episode_info: Option<EpisodeInfo>,
     ranked: Option<i64>,
     info_page: Option<String>,
 }
@@ -78,18 +78,10 @@ impl Torrent {
         &self.pubdate
     }
 
-    /// Return the episode info containing this key -> value :
-    /// * imdb -> IMDB id
-    /// * tvrage -> TVRage id
-    /// * tvdb -> TVDB id
-    /// * themoviedb -> TMDB id
-    /// * airdate -> Air date, format is: YYYY-MM-DD
-    /// * epnum -> Episode number
-    /// * seasonnum -> Season number
-    /// * title -> Title of the episode
+    /// Return the episode info.
     ///
     /// Only available when `format` is set to `Format::JsonExtended`.
-    pub fn episode_info(&self) -> &Option<HashMap<String, Option<String>>> {
+    pub fn episode_info(&self) -> &Option<EpisodeInfo> {
         &self.episode_info
     }
 

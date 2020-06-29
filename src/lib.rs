@@ -27,6 +27,7 @@ pub mod mode;
 pub mod sort_by;
 pub mod error;
 pub mod api_parameters_builder;
+pub mod episode_info;
 
 /* The API has a 1req/2s limit. We take one extra second just to be sure. */
 const REQUEST_TIME_LIMIT: u64 = 3;
