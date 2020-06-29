@@ -42,7 +42,7 @@ pub struct RarBgApi {
 }
 
 impl RarBgApi {
-    /// Return the name of you app.
+    /// Return the name of your app.
     ///
     /// # Example
     /// ```
@@ -68,6 +68,18 @@ impl RarBgApi {
         &self.token
     }
 
+    /// Create a new RARBG client.
+    ///
+    /// # Arguments
+    ///
+    /// * `app_id` - A string slice that holds the name of your app.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use rarbg_api::RarBgApi;
+    /// let api = RarBgApi::new("example");
+    /// ```
     pub fn new(app_id: &str) -> Self {
         RarBgApi {
             token: Token::new(app_id),

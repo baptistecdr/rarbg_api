@@ -9,6 +9,8 @@
 
 ## Table of contents
 - [Quick start](#quick-start)
+    - [Examples](#examples)
+    - [Documentation](#documentation)
 - [Bugs and feature requests](#bugs-and-feature-requests)
 - [Contributing](#contributing)
 - [Contributors](#contributors)
@@ -76,6 +78,10 @@ fn main() {
     }
 }
 ```
+
+## Documentation
+
+Documentation is available [here](https://docs.rs/rarbg_api/0.4.0).
 
 ## Bugs and feature requests
 Have a bug or a feature request? Please first search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/baptistecdr/rarbg_api/issues).
