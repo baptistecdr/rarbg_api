@@ -19,23 +19,23 @@ pub struct EpisodeInfo {
 
 impl EpisodeInfo {
     /// Return the TMDB id.
-    pub fn imdb_id(&self) -> &Option<String> {
-        &self.imdb
+    pub fn imdb_id(&self) -> Option<&String> {
+        self.imdb.as_ref()
     }
 
     /// Return the TVRage id.
-    pub fn tvrage_id(&self) -> &Option<String> {
-        &self.tvrage
+    pub fn tvrage_id(&self) -> Option<&String> {
+        self.tvrage.as_ref()
     }
 
     /// Return the TVDB id.
-    pub fn tvdb_id(&self) -> &Option<String> {
-        &self.tvdb
+    pub fn tvdb_id(&self) -> Option<&String> {
+        self.tvdb.as_ref()
     }
 
     /// Return the TMDB id.
-    pub fn tmdb_id(&self) -> &Option<String> {
-        &self.themoviedb
+    pub fn tmdb_id(&self) -> Option<&String> {
+        self.themoviedb.as_ref()
     }
 
     /// Return the airing date.
@@ -51,18 +51,18 @@ impl EpisodeInfo {
     }
 
     /// Return the episode number.
-    pub fn episode_number(&self) -> &Option<String> {
-        &self.epnum
+    pub fn episode_number(&self) -> Option<&String> {
+        self.epnum.as_ref()
     }
 
     /// Return the season number.
-    pub fn season_number(&self) -> &Option<String> {
-        &self.seasonnum
+    pub fn season_number(&self) -> Option<&String> {
+        self.seasonnum.as_ref()
     }
 
     /// Return the title.
-    pub fn title(&self) -> &Option<String> {
-        &self.title
+    pub fn title(&self) -> Option<&String> {
+        self.title.as_ref()
     }
 }
 

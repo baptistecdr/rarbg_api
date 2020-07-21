@@ -122,7 +122,7 @@ impl RarBgApi {
             }
 
             if pm.categories().is_some() {
-                let categories = pm.categories().as_ref().unwrap();
+                let categories = pm.categories().unwrap();
                 let stringified_categories: Vec<&str> = categories.iter().map(|c| c.as_str()).collect();
                 let joined_categories: String = stringified_categories.join(";");
                 request = request.query(&[("category", joined_categories)]);

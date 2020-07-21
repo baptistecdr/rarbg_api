@@ -36,12 +36,12 @@ impl Torrent {
     /// Return the title.
     ///
     /// Only available when `format` is set to `Format::JsonExtended`.
-    pub fn title(&self) -> &Option<String> { &self.title }
+    pub fn title(&self) -> Option<&String> { self.title.as_ref() }
 
     /// Return the filename
     ///
     /// Only available when `format` is set to `Format::Json`.
-    pub fn filename(&self) -> &Option<String> { &self.filename }
+    pub fn filename(&self) -> Option<&String> { self.filename.as_ref() }
 
     /// Return the category that the torrent belongs to.
     pub fn category(&self) -> &Category {
@@ -49,27 +49,27 @@ impl Torrent {
     }
 
     /// Return a magnet link.
-    pub fn download(&self) -> &String { &self.download }
+    pub fn download(&self) -> &str { self.download.as_str() }
 
     /// Return the number of seeders available.
     ///
     /// Only available when `format` is set to `Format::JsonExtended`.
-    pub fn seeders(&self) -> &Option<u32> {
-        &self.seeders
+    pub fn seeders(&self) -> Option<&u32> {
+        self.seeders.as_ref()
     }
 
     /// Return the number of leechers.
     ///
     /// Only available when `format` is set to `Format::JsonExtended`.
-    pub fn leechers(&self) -> &Option<u32> {
-        &self.leechers
+    pub fn leechers(&self) -> Option<&u32> {
+        self.leechers.as_ref()
     }
 
     /// Return the size in bytes.
     ///
     /// Only available when `format` is set to `Format::JsonExtended`.
-    pub fn size(&self) -> &Option<u128> {
-        &self.size
+    pub fn size(&self) -> Option<&u128> {
+        self.size.as_ref()
     }
 
     /// Return the publication date.
@@ -77,29 +77,29 @@ impl Torrent {
     /// DateTime is always synchronize with UTC.
     ///
     /// Only available when `format` is set to `Format::JsonExtended`.
-    pub fn pub_date(&self) -> &Option<DateTime<Utc>> {
-        &self.pubdate
+    pub fn pub_date(&self) -> Option<&DateTime<Utc>> {
+        self.pubdate.as_ref()
     }
 
     /// Return the episode info.
     ///
     /// Only available when `format` is set to `Format::JsonExtended`.
-    pub fn episode_info(&self) -> &Option<EpisodeInfo> {
-        &self.episode_info
+    pub fn episode_info(&self) -> Option<&EpisodeInfo> {
+        self.episode_info.as_ref()
     }
 
     /// Return true if it's a scene, rarbg or rartv releases, otherwise false.
     ///
     /// Only available when `format` is set to `Format::JsonExtended`.
-    pub fn ranked(&self) -> &Option<bool> {
-        &self.ranked
+    pub fn ranked(&self) -> Option<&bool> {
+        self.ranked.as_ref()
     }
 
     /// Return an HTTP link that redirect to the torrent page.
     ///
     /// Only available when `format` is set to `Format::JsonExtended`.
-    pub fn info_page(&self) -> &Option<String> {
-        &self.info_page
+    pub fn info_page(&self) -> Option<&String> {
+        self.info_page.as_ref()
     }
 
     /// Export the torrent to a magnet file using its title, filename or UUID as filename.
