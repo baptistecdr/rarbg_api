@@ -34,7 +34,7 @@ pub enum Category {
     TvEpisodes,
     #[serde(rename = "TV HD Episodes")]
     TvHdEpisodes,
-    #[serde(rename = "TV UHD Episodes")]
+    #[serde(rename = "Movies/TV-UHD-episodes")]
     TvUhdEpisodes,
     #[serde(rename = "Music/MP3")]
     MusicMp3,
