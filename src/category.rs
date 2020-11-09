@@ -1,8 +1,7 @@
 extern crate core;
-extern crate serde_derive;
 extern crate std;
 
-use self::serde_derive::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Copy, Clone, Serialize, Deserialize, Debug)]
 pub enum Category {
@@ -53,7 +52,7 @@ pub enum Category {
     #[serde(rename = "Games/PS4")]
     GamesPs4,
     #[serde(rename = "e-Books")]
-    Ebooks
+    Ebooks,
 }
 
 impl Category {
@@ -82,7 +81,7 @@ impl Category {
             Category::GamesXbox360 => "32",
             Category::SoftwarePcIso => "33",
             Category::GamesPs4 => "53",
-            Category::Ebooks => "35"
+            Category::Ebooks => "35",
         }
     }
 }

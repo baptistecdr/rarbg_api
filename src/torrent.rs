@@ -1,4 +1,3 @@
-extern crate serde_derive;
 extern crate uuid;
 
 use std::fmt;
@@ -7,13 +6,12 @@ use std::io;
 use std::io::Write;
 
 use chrono::{DateTime, Utc};
-use serde::{Deserialize, Deserializer};
 use serde::de::{Error, Unexpected};
+use serde::{Deserialize, Deserializer, Serialize};
 
 use category::Category;
 use episode_info::EpisodeInfo;
 
-use self::serde_derive::{Deserialize, Serialize};
 use self::uuid::Uuid;
 
 #[derive(Clone, Serialize, Deserialize, Debug)]
@@ -36,12 +34,16 @@ impl Torrent {
     /// Return the title.
     ///
     /// Only available when `format` is set to `Format::JsonExtended`.
-    pub fn title(&self) -> Option<&String> { self.title.as_ref() }
+    pub fn title(&self) -> Option<&String> {
+        self.title.as_ref()
+    }
 
     /// Return the filename
     ///
     /// Only available when `format` is set to `Format::Json`.
-    pub fn filename(&self) -> Option<&String> { self.filename.as_ref() }
+    pub fn filename(&self) -> Option<&String> {
+        self.filename.as_ref()
+    }
 
     /// Return the category that the torrent belongs to.
     pub fn category(&self) -> &Category {
@@ -49,7 +51,9 @@ impl Torrent {
     }
 
     /// Return a magnet link.
-    pub fn download(&self) -> &str { self.download.as_str() }
+    pub fn download(&self) -> &str {
+        self.download.as_str()
+    }
 
     /// Return the number of seeders available.
     ///
@@ -113,7 +117,7 @@ impl Torrent {
             Some(title) => title.clone(),
             None => match self.filename() {
                 Some(filename) => filename.clone(),
-                None => Uuid::new_v4().to_string()
+                None => Uuid::new_v4().to_string(),
             },
         };
         let filepath = format!("{}/{}.magnet", path, filename);
@@ -135,7 +139,10 @@ impl fmt::Display for Torrent {
 }
 
 // https://github.com/serde-rs/serde/issues/1344#issuecomment-410309140
-fn bool_from_int<'de, D>(deserializer: D) -> Result<Option<bool>, D::Error> where D: Deserializer<'de>, {
+fn bool_from_int<'de, D>(deserializer: D) -> Result<Option<bool>, D::Error>
+where
+    D: Deserializer<'de>,
+{
     match u8::deserialize(deserializer)? {
         0 => Ok(Some(false)),
         1 => Ok(Some(true)),
