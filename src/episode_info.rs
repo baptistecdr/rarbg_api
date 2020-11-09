@@ -1,8 +1,6 @@
-extern crate serde_derive;
-
 use chrono::NaiveDate;
 
-use self::serde_derive::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize};
 use std::str::FromStr;
 
 #[derive(Clone, Serialize, Deserialize, Debug)]
@@ -65,5 +63,3 @@ impl EpisodeInfo {
         self.title.as_ref()
     }
 }
-
-

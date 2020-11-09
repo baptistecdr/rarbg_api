@@ -1,6 +1,4 @@
-extern crate serde_derive;
-
-use self::serde_derive::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct Error {

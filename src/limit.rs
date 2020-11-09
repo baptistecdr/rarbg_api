@@ -1,6 +1,4 @@
-extern crate serde_derive;
-
-use self::serde_derive::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Copy, Clone, Serialize, Deserialize, Debug)]
 pub enum Limit {
@@ -10,7 +8,9 @@ pub enum Limit {
 }
 
 impl Default for Limit {
-    fn default() -> Self { Limit::TwentyFive }
+    fn default() -> Self {
+        Limit::TwentyFive
+    }
 }
 
 impl Limit {

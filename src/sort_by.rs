@@ -1,6 +1,4 @@
-extern crate serde_derive;
-
-use self::serde_derive::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Copy, Clone, Serialize, Deserialize, Debug)]
 pub enum SortBy {
@@ -10,7 +8,9 @@ pub enum SortBy {
 }
 
 impl Default for SortBy {
-    fn default() -> Self { SortBy::Last }
+    fn default() -> Self {
+        SortBy::Last
+    }
 }
 
 impl SortBy {
@@ -18,7 +18,7 @@ impl SortBy {
         match self {
             SortBy::Seeders => "seeders",
             SortBy::Leechers => "leechers",
-            SortBy::Last => "last"
+            SortBy::Last => "last",
         }
     }
 }
