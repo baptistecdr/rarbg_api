@@ -1,4 +1,4 @@
-use torrent::Torrent;
+use crate::torrent::Torrent;
 
 use serde::{Deserialize, Serialize};
 

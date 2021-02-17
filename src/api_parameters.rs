@@ -1,7 +1,7 @@
-use category::Category;
-use format::Format;
-use limit::Limit;
-use sort_by::SortBy;
+use crate::category::Category;
+use crate::format::Format;
+use crate::sort_by::SortBy;
+use crate::limit::Limit;
 
 #[derive(Clone, Debug)]
 pub struct ApiParameters {
@@ -26,7 +26,7 @@ impl ApiParameters {
         &self.limit
     }
 
-    /// Return in which categories the request will operates.
+    /// Return in which categories the request will operate.
     pub fn categories(&self) -> Option<&Vec<Category>> {
         self.categories.as_ref()
     }

@@ -9,8 +9,8 @@ use chrono::{DateTime, Utc};
 use serde::de::{Error, Unexpected};
 use serde::{Deserialize, Deserializer, Serialize};
 
-use category::Category;
-use episode_info::EpisodeInfo;
+use crate::category::Category;
+use crate::episode_info::EpisodeInfo;
 
 use self::uuid::Uuid;
 

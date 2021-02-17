@@ -1,8 +1,8 @@
-use api_parameters::ApiParameters;
-use category::Category;
-use format::Format;
-use limit::Limit;
-use sort_by::SortBy;
+use crate::api_parameters::ApiParameters;
+use crate::category::Category;
+use crate::format::Format;
+use crate::limit::Limit;
+use crate::sort_by::SortBy;
 
 #[derive(Clone, Debug)]
 pub struct ApiParametersBuilder {

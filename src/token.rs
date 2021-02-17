@@ -3,13 +3,11 @@ extern crate reqwest;
 use std::collections::HashMap;
 use std::time::SystemTime;
 
-use reqwest::blocking::{Client, Response};
-use reqwest::Error;
-
-use ENDPOINT;
-use USER_AGENT;
+use crate::ENDPOINT;
+use crate::USER_AGENT;
 
 use serde::{Deserialize, Serialize};
+use reqwest::{Client, Response};
 
 #[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct Token {
@@ -53,9 +51,9 @@ impl Token {
     /// use rarbg_api::token::Token;
     /// let token = Token::new("example");
     /// ```
-    pub fn new(app_id: &str) -> Self {
-        let response = Token::get(app_id);
-        let content = Token::parse(response);
+    pub async fn new(app_id: &str) -> Self {
+        let response = Token::get(app_id).await;
+        let content = Token::parse(response).await;
         let value = content.get("token");
         match value {
             Some(token) => Token {
@@ -66,21 +64,21 @@ impl Token {
         }
     }
 
-    fn get(app_id: &str) -> Response {
+    async fn get(app_id: &str) -> Response {
         let client: Client = Client::builder().user_agent(USER_AGENT).build().unwrap();
-        let response: Result<Response, Error> = client
+        let response = client
             .get(ENDPOINT)
             .query(&[("get_token", "get_token")])
             .query(&[("app_id", app_id)])
-            .send();
+            .send().await;
         match response {
             Ok(response) => response,
             Err(reason) => panic!("{}", reason),
         }
     }
 
-    fn parse(response: Response) -> HashMap<String, String> {
-        match response.json() {
+    async fn parse(response: Response) -> HashMap<String, String> {
+        match response.json().await {
             Ok(json) => json,
             Err(reason) => panic!("{}", reason),
         }
