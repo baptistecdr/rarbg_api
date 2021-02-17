@@ -21,7 +21,7 @@ impl Token {
     /// # Example
     /// ```
     /// use rarbg_api::token::Token;
-    /// let token = Token::new("example");
+    /// let token = Token::new("example").await;
     /// let value = token.value();
     /// ```
     pub fn value(&self) -> &str {
@@ -33,7 +33,7 @@ impl Token {
     /// # Example
     /// ```
     /// use rarbg_api::token::Token;
-    /// let token = Token::new("example");
+    /// let token = Token::new("example").await;
     /// let time_of_creation = token.created_at();
     /// ```
     pub fn created_at(&self) -> &SystemTime {
@@ -49,7 +49,7 @@ impl Token {
     /// # Example
     /// ```
     /// use rarbg_api::token::Token;
-    /// let token = Token::new("example");
+    /// let token = Token::new("example").await;
     /// ```
     pub async fn new(app_id: &str) -> Self {
         let response = Token::get(app_id).await;
@@ -90,7 +90,7 @@ impl Token {
     /// # Example
     /// ```
     /// use rarbg_api::token::Token;
-    /// let token = Token::new("example");
+    /// let token = Token::new("example").await;
     /// assert!(token.is_valid(), "Token should be valid !");
     /// ```
     pub fn is_valid(&self) -> bool {
