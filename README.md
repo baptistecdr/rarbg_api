@@ -25,7 +25,7 @@ In particular, it allows to list or search torrents and to export them to a magn
 Add this to your `Cargo.toml`:
 ```toml
 [dependencies]
-rarbg_api = "0.5.2"
+rarbg_api = "0.5.3"
 ```
 ### Examples
 ```rust

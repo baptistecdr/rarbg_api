@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Copy, Clone, Serialize, Deserialize, Debug)]
+#[derive(Copy, Clone, Serialize, Deserialize, Debug, Hash, PartialEq, Eq)]
 pub enum Limit {
     TwentyFive,
     Fifty,
