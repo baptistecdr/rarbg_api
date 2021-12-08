@@ -44,10 +44,15 @@ impl RarBgApi {
     /// Return the name of your app.
     ///
     /// # Example
+    ///
     /// ```
     /// use rarbg_api::RarBgApi;
-    /// let api = RarBgApi::new("example").await;
-    /// assert_eq!("example", api.app_id())
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let api = RarBgApi::new("RustExample").await;
+    ///     assert_eq!("RustExample", api.app_id())
+    /// }
     /// ```
     pub fn app_id(&self) -> &str {
         &self.app_id.as_str()
@@ -56,12 +61,16 @@ impl RarBgApi {
     /// Return the token associate to your app.
     ///
     /// # Example
+    ///
     /// ```
     /// use rarbg_api::RarBgApi;
     /// use rarbg_api::token::Token;
     ///
-    /// let api = RarBgApi::new("example").await;
-    /// let token: &Token = api.token();
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let api = RarBgApi::new("RustExample").await;
+    ///     let token: &Token = api.token();
+    /// }
     /// ```
     pub fn token(&self) -> &Token {
         &self.token
@@ -77,7 +86,13 @@ impl RarBgApi {
     ///
     /// ```
     /// use rarbg_api::RarBgApi;
-    /// let api = RarBgApi::new("example").await;
+    /// use rarbg_api::token::Token;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let api = RarBgApi::new("RustExample").await;
+    ///     let token: &Token = api.token();
+    /// }
     /// ```
     pub async fn new(app_id: &str) -> Self {
         RarBgApi {
@@ -152,14 +167,21 @@ impl RarBgApi {
         }
     }
 
-    /// List the torrents avalaible depending on parameters given.
+    /// List the torrents available depending on parameters given.
     ///
     /// # Example
+    ///
     /// ```
     /// use rarbg_api::RarBgApi;
-    /// let mut api = RarBgApi::new("example").await;
-    /// // It will get the 25 last ranked torrents
-    /// let result = api.list(None).await;
+    /// use rarbg_api::token::Token;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let mut api = RarBgApi::new("RustExample").await;
+    ///     // It will get the 25 last ranked torrents
+    ///     let result = api.list(None).await;
+    ///     assert!(result.is_ok())
+    /// }
     /// ```
     pub async fn list(&mut self, parameters: Option<&ApiParameters>) -> Result<Torrents, Error> {
         self.request(None, Mode::List, parameters).await
@@ -168,10 +190,17 @@ impl RarBgApi {
     /// Search torrents by its name with some or no parameters.
     ///
     /// # Example
+    ///
     /// ```
     /// use rarbg_api::RarBgApi;
-    /// let mut api = RarBgApi::new("example").await;
-    /// let result = api.search("Rick and Morty", None).await;
+    /// use rarbg_api::token::Token;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let mut api = RarBgApi::new("RustExample").await;
+    ///     let result = api.search("Rick and Morty", None).await;
+    ///     assert!(result.is_ok())
+    /// }
     /// ```
     pub async fn search(&mut self, value: &str, parameters: Option<&ApiParameters>) -> Result<Torrents, Error> {
         self.request(Some(&[("search_string", value)]), Mode::Search, parameters).await
@@ -180,11 +209,18 @@ impl RarBgApi {
     /// Search torrents by its IMDB id with some or no parameters.
     ///
     /// # Example
+    ///
     /// ```
     /// use rarbg_api::RarBgApi;
-    /// let mut api = RarBgApi::new("example").await;
-    /// // tt2861424 is Rick and Morty
-    /// let result = api.search_by_imdb("tt2861424", None).await;
+    /// use rarbg_api::token::Token;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let mut api = RarBgApi::new("RustExample").await;
+    ///     // tt2861424 is Rick and Morty
+    ///     let result = api.search_by_imdb("tt2861424", None).await;
+    ///     assert!(result.is_ok())
+    /// }
     /// ```
     pub async fn search_by_imdb(&mut self, value: &str, parameters: Option<&ApiParameters>) -> Result<Torrents, Error> {
         self.request(Some(&[("search_imdb", value)]), Mode::Search, parameters).await
@@ -193,11 +229,18 @@ impl RarBgApi {
     /// Search torrents by its TVDB id with some or no parameters.
     ///
     /// # Example
+    ///
     /// ```
     /// use rarbg_api::RarBgApi;
-    /// let mut api = RarBgApi::new("example").await;
-    /// // 275274 is Rick and Morty
-    /// let result = api.search_by_tvdb("275274", None).await;
+    /// use rarbg_api::token::Token;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let mut api = RarBgApi::new("RustExample").await;
+    ///     // 275274 is Rick and Morty
+    ///     let result = api.search_by_tvdb("275274", None).await;
+    ///     assert!(result.is_ok())
+    /// }
     /// ```
     pub async fn search_by_tvdb(&mut self, value: &str, parameters: Option<&ApiParameters>) -> Result<Torrents, Error> {
         self.request(Some(&[("search_tvdb", value)]), Mode::Search, parameters).await
@@ -206,11 +249,18 @@ impl RarBgApi {
     /// Search torrents by its TMDB id with some or no parameters.
     ///
     /// # Example
+    ///
     /// ```
     /// use rarbg_api::RarBgApi;
-    /// let mut api = RarBgApi::new("example").await;
-    /// // 60625 is Rick and Morty
-    /// let result = api.search_by_tmdb("60625", None).await;
+    /// use rarbg_api::token::Token;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let mut api = RarBgApi::new("RustExample").await;
+    ///     // 60625 is Rick and Morty
+    ///     let result = api.search_by_tmdb("60625", None).await;
+    ///     assert!(result.is_ok())
+    /// }
     /// ```
     pub async fn search_by_tmdb(&mut self, value: &str, parameters: Option<&ApiParameters>) -> Result<Torrents, Error> {
         self.request(Some(&[("search_tmdb", value)]), Mode::Search, parameters).await

@@ -19,10 +19,15 @@ impl Token {
     /// Return the value of the token obtained from the API.
     ///
     /// # Example
+    ///
     /// ```
     /// use rarbg_api::token::Token;
-    /// let token = Token::new("example").await;
-    /// let value = token.value();
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let token = Token::new("RustExample").await;
+    ///     let value = token.value();
+    ///     assert_ne!(value, "")
+    /// }
     /// ```
     pub fn value(&self) -> &str {
         self.value.as_str()
@@ -31,10 +36,15 @@ impl Token {
     /// Returns the time when the token was created.
     ///
     /// # Example
+    ///
     /// ```
     /// use rarbg_api::token::Token;
-    /// let token = Token::new("example").await;
-    /// let time_of_creation = token.created_at();
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let token = Token::new("RustExample").await;
+    ///     let time_of_creation = token.created_at();
+    /// }
     /// ```
     pub fn created_at(&self) -> &SystemTime {
         &self.created_at
@@ -42,14 +52,20 @@ impl Token {
 
     /// Create a Token with the value obtained from the API.
     /// This token can be use to make requests to the API.
+    ///
     /// # Panics
     ///
     /// Panics if a token cannot be retrieve from the API.
     ///
     /// # Example
+    ///
     /// ```
     /// use rarbg_api::token::Token;
-    /// let token = Token::new("example").await;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let token = Token::new("RustExample").await;
+    /// }
     /// ```
     pub async fn new(app_id: &str) -> Self {
         let response = Token::get(app_id).await;
@@ -88,10 +104,15 @@ impl Token {
     /// Officially, a token is valid for 15 minutes but we keep this token valid for 10 minutes.
     ///
     /// # Example
+    ///
     /// ```
     /// use rarbg_api::token::Token;
-    /// let token = Token::new("example").await;
-    /// assert!(token.is_valid(), "Token should be valid !");
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let token = Token::new("RustExample").await;
+    ///     assert!(token.is_valid(), "Token should be valid !");
+    /// }
     /// ```
     pub fn is_valid(&self) -> bool {
         let sys_time = SystemTime::now();
