@@ -1,7 +1,7 @@
 use crate::category::Category;
 use crate::format::Format;
-use crate::sort_by::SortBy;
 use crate::limit::Limit;
+use crate::sort_by::SortBy;
 
 #[derive(Clone, Debug)]
 pub struct ApiParameters {
@@ -32,7 +32,9 @@ impl ApiParameters {
     }
 
     /// Return the sorting criteria.
-    pub fn sort_by(&self) -> &SortBy { &self.sort_by }
+    pub fn sort_by(&self) -> &SortBy {
+        &self.sort_by
+    }
 
     /// Return the number of minimum seeders that a torrent will have.
     pub fn minimum_seeders(&self) -> Option<&u32> {

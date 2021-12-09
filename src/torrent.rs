@@ -122,8 +122,8 @@ impl Torrent {
         };
         let filepath = format!("{}/{}.magnet", path, filename);
         let file = File::create(&filepath);
-        if file.is_err() {
-            return Err(file.unwrap_err());
+        if let Err(error) = file {
+            return Err(error);
         }
         match file.unwrap().write_all(self.download.as_bytes()) {
             Ok(_) => Ok(filepath),

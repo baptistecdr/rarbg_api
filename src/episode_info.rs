@@ -45,7 +45,7 @@ impl EpisodeInfo {
             }
             return Some(NaiveDate::from_str(date.as_str()).unwrap());
         }
-        return None;
+        None
     }
 
     /// Return the episode number.

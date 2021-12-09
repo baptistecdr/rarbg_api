@@ -167,3 +167,9 @@ impl ApiParametersBuilder {
         }
     }
 }
+
+impl Default for ApiParametersBuilder {
+    fn default() -> Self {
+        Self::new()
+    }
+}

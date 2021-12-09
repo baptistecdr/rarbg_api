@@ -6,8 +6,8 @@ use std::time::SystemTime;
 use crate::ENDPOINT;
 use crate::USER_AGENT;
 
-use serde::{Deserialize, Serialize};
 use reqwest::{Client, Response};
+use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct Token {
@@ -20,13 +20,13 @@ impl Token {
     ///
     /// # Example
     ///
-    /// ```
+    /// ```no_run
     /// use rarbg_api::token::Token;
+    ///
     /// #[tokio::main]
     /// async fn main() {
     ///     let token = Token::new("RustExample").await;
     ///     let value = token.value();
-    ///     assert_ne!(value, "")
     /// }
     /// ```
     pub fn value(&self) -> &str {
@@ -37,7 +37,7 @@ impl Token {
     ///
     /// # Example
     ///
-    /// ```
+    /// ```no_run
     /// use rarbg_api::token::Token;
     ///
     /// #[tokio::main]
@@ -59,7 +59,7 @@ impl Token {
     ///
     /// # Example
     ///
-    /// ```
+    /// ```no_run
     /// use rarbg_api::token::Token;
     ///
     /// #[tokio::main]
@@ -86,7 +86,8 @@ impl Token {
             .get(ENDPOINT)
             .query(&[("get_token", "get_token")])
             .query(&[("app_id", app_id)])
-            .send().await;
+            .send()
+            .await;
         match response {
             Ok(response) => response,
             Err(reason) => panic!("{}", reason),
@@ -105,7 +106,7 @@ impl Token {
     ///
     /// # Example
     ///
-    /// ```
+    /// ```no_run
     /// use rarbg_api::token::Token;
     ///
     /// #[tokio::main]

@@ -46,7 +46,7 @@ use rarbg_api::sort_by::SortBy;
 #[tokio::main]
 pub async fn main() -> Result<(), ()> {
     let mut api = RarBgApi::new("my_app_id");
-    let parameters = ApiParametersBuilder::new().await
+    let parameters = ApiParametersBuilder::new()
         .limit(Limit::TwentyFive)
         .categories(vec![Category::TvUhdEpisodes, Category::TvHdEpisodes, Category::TvEpisodes])
         .sort_by(SortBy::Seeders)
