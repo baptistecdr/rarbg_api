@@ -7,15 +7,6 @@
     <a href="https://github.com/baptistecdr/rarbg_api/issues/new">Request feature</a>
 </p>
 
-## Table of contents
-
-- [Quick start](#quick-start)
-    - [Examples](#examples)
-    - [Documentation](#documentation)
-- [Bugs and feature requests](#bugs-and-feature-requests)
-- [Contributing](#contributing)
-- [Contributors](#contributors)
-
 ## Description
 
 This Rust module allows easy interaction with RARBG TorrentAPI.
@@ -105,8 +96,7 @@ Contributions are welcome!
 
 ## Contributors
 
-* [Orestis](https://github.com/omalaspinas) for his feedback
-* [MGlolenstine](https://github.com/MGlolenstine)
+- [Orestis](https://github.com/omalaspinas) for his feedback
 
 ## Disclaimer
 
