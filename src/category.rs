@@ -21,9 +21,11 @@ pub enum Category {
     MoviesX2643d,
     #[serde(rename = "Movies/x264/4k")]
     MoviesX2644k,
+    #[serde(rename = "Movies/x265/1080")]
+    MoviesX2651080,
     #[serde(rename = "Movies/x265/4k")]
     MoviesX2654k,
-    #[serde(rename = "Movies/x264/4k/HDR")]
+    #[serde(rename = "Movies/x265/4k/HDR")]
     MoviesX2654kHdr,
     #[serde(rename = "Movies/Full BD")]
     MoviesFullBd,
@@ -66,6 +68,7 @@ impl Category {
             Category::MoviesX264720 => "45",
             Category::MoviesX2643d => "47",
             Category::MoviesX2644k => "50",
+            Category::MoviesX2651080 => "54",
             Category::MoviesX2654k => "51",
             Category::MoviesX2654kHdr => "52",
             Category::MoviesFullBd => "42",
