@@ -56,7 +56,7 @@ impl RarBgApi {
     /// }
     /// ```
     pub fn app_id(&self) -> &str {
-        &self.app_id.as_str()
+        self.app_id.as_str()
     }
 
     /// Return the token associate to your app.
