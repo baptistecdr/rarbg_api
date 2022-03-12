@@ -1,4 +1,4 @@
-name: Rust-CI
+name: Rust-CI-CD
 
 on: [push, pull_request]
 
