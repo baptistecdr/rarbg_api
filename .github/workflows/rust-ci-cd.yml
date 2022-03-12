@@ -11,16 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        name: Clone Repository
       - uses: actions-rs/toolchain@v1
+        name: Get Rust Toolchain
         with:
           toolchain: stable
-      - name: Code Style
+      - name: Check Code Style
         run: cargo fmt --verbose
-      - name: Linter
+      - name: Run Linter
         run: cargo clippy --verbose
       - name: Build
         run: cargo build --verbose
-      - name: Tests
+      - name: Test
         run: cargo test --verbose
   release:
     needs: build_and_test
@@ -29,6 +31,7 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/master' && contains(github.event.head_commit.message, 'Release')
     steps:
       - uses: actions/checkout@v3
+        name: Clone Repository
       - name: Get Release Version
         env:
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
@@ -39,15 +42,15 @@ jobs:
         name: Create Tag
         env:
           VERSION: $(echo $COMMIT_MESSAGE | grep -Po "v\d+\.\d+\.\d+")
-        if: contains(github.event.head_commit.message, 'Release')
         with:
           tag: ${{ steps.version.outputs.VERSION }}
           message: ${{ github.event.head_commit.message }}
       - uses: actions-rs/toolchain@v1
+        name: Get Rust Toolchain
         with:
           toolchain: stable
           override: true
       - uses: katyo/publish-crates@v1
-        name: Publish
+        name: Publish to Crates.io
         with:
           registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
