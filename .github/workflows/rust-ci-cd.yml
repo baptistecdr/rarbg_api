@@ -1,0 +1,53 @@
+name: Rust-CI
+
+on: [push, pull_request]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build_and_test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - name: Code Style
+        run: cargo fmt --verbose
+      - name: Linter
+        run: cargo clippy --verbose
+      - name: Build
+        run: cargo build --verbose
+      - name: Tests
+        run: cargo test --verbose
+  release:
+    needs: build_and_test
+    name: Release
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master' && contains(github.event.head_commit.message, 'Release')
+    steps:
+      - uses: actions/checkout@v3
+      - name: Get Release Version
+        env:
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        run: |
+          echo "::set-output name=VERSION::$(echo $COMMIT_MESSAGE | grep -Po 'v\d+\.\d+\.\d+')"
+        id: version
+      - uses: rickstaa/action-create-tag@v1
+        name: Create Tag
+        env:
+          VERSION: $(echo $COMMIT_MESSAGE | grep -Po "v\d+\.\d+\.\d+")
+        if: contains(github.event.head_commit.message, 'Release')
+        with:
+          tag: ${{ steps.version.outputs.VERSION }}
+          message: ${{ github.event.head_commit.message }}
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - uses: katyo/publish-crates@v1
+        name: Publish
+        with:
+          registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
