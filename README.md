@@ -7,6 +7,12 @@
     <a href="https://github.com/baptistecdr/rarbg_api/issues/new">Request feature</a>
 </p>
 
+<div align="center">
+
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/baptistecdr/rarbg_api/Rust-CI-CD) ![Crates.io](https://img.shields.io/crates/v/rarbg_api) ![Crates.io](https://img.shields.io/crates/d/rarbg_api)  ![GitHub](https://img.shields.io/github/license/baptistecdr/rarbg_api)
+
+</div>
+
 ## Description
 
 This Rust module allows easy interaction with RARBG TorrentAPI.
