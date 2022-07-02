@@ -9,7 +9,7 @@ license = "MIT"
 name = "rarbg_api"
 publish = ["crates-io"]
 repository = "https://github.com/baptistecdr/rarbg_api"
-version = "1.0.18"
+version = "1.0.19"
 edition = "2018"
 
 [dependencies]
