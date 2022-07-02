@@ -10,9 +10,9 @@ jobs:
     name: Build and Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
         name: Clone Repository
-      - uses: actions-rs/toolchain@v1
+      - uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # tag=v1
         name: Get Rust Toolchain
         with:
           toolchain: stable
@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' && startsWith(github.event.head_commit.message, 'Release v')
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
         name: Clone Repository
       - name: Get Release Version
         env:
@@ -38,19 +38,19 @@ jobs:
         run: |
           echo "::set-output name=VERSION::$(echo $COMMIT_MESSAGE | grep -Po 'v\d+\.\d+\.\d+')"
         id: version
-      - uses: rickstaa/action-create-tag@v1
+      - uses: rickstaa/action-create-tag@1ef0869561b8f45faba8b8e29984eb83b054e242 # tag=v1
         name: Create Tag
         env:
           VERSION: $(echo $COMMIT_MESSAGE | grep -Po "v\d+\.\d+\.\d+")
         with:
           tag: ${{ steps.version.outputs.VERSION }}
           message: ${{ github.event.head_commit.message }}
-      - uses: actions-rs/toolchain@v1
+      - uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # tag=v1
         name: Get Rust Toolchain
         with:
           toolchain: stable
           override: true
-      - uses: katyo/publish-crates@v1
+      - uses: katyo/publish-crates@2cca45f9d9d2537d24309c552e0d8af84a1892b5 # tag=v1
         name: Publish to Crates.io
         with:
           registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
