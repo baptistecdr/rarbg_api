@@ -50,7 +50,7 @@ jobs:
         with:
           toolchain: stable
           override: true
-      - uses: katyo/publish-crates@2cca45f9d9d2537d24309c552e0d8af84a1892b5 # tag=v1
+      - uses: katyo/publish-crates@2ffe86caafd7b9be8c4eb795ffdb2dd41ae8564c # tag=v1
         name: Publish to Crates.io
         with:
           registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
