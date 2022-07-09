@@ -41,8 +41,8 @@ use rarbg_api::RarBgApi;
 use rarbg_api::sort_by::SortBy;
 
 #[tokio::main]
-pub async fn main() -> Result<(), ()> {
-    let mut api = RarBgApi::new("my_app_id");
+pub async fn main() {
+    let mut api = RarBgApi::new("my_app_id").await;
     let parameters = ApiParametersBuilder::new()
         .limit(Limit::TwentyFive)
         .categories(vec![Category::TvUhdEpisodes, Category::TvHdEpisodes, Category::TvEpisodes])
@@ -55,7 +55,6 @@ pub async fn main() -> Result<(), ()> {
         Ok(result) => result.torrents().iter().for_each(|t| println!("Torrent exported to '{}'.", t.export(".").unwrap())),
         Err(reason) => println!("{}", reason.error())
     }
-    Ok(())
 }
 ```
 
@@ -69,7 +68,7 @@ use rarbg_api::RarBgApi;
 use rarbg_api::sort_by::SortBy;
 
 #[tokio::main]
-pub async fn main() -> Result<(), ()> {
+pub async fn main() {
     let mut api = RarBgApi::new("my_app_id").await;
     let parameters = ApiParametersBuilder::new()
         .limit(Limit::TwentyFive)
@@ -83,7 +82,6 @@ pub async fn main() -> Result<(), ()> {
         Ok(result) => result.torrents().iter().take(1).for_each(|t| println!("Torrent exported to '{}'.", t.export(".").unwrap())),
         Err(reason) => println!("{}", reason.error())
     }
-    Ok(())
 }
 ```
 

@@ -79,7 +79,7 @@ impl ApiParametersBuilder {
     /// ```
     /// use rarbg_api::api_parameters_builder::ApiParametersBuilder;
     ///
-    /// let apb = ApiParametersBuilder::new().minimum_seeders(42);
+    /// let apb = ApiParametersBuilder::new().minimum_seeders(1337);
     /// ```
     pub fn minimum_seeders(&mut self, minimum_seeders: u32) -> &mut ApiParametersBuilder {
         self.minimum_seeders = Some(minimum_seeders);
@@ -150,10 +150,17 @@ impl ApiParametersBuilder {
     ///                          .limit(Limit::OneHundred)
     ///                          .categories(vec![Category::TvHdEpisodes, Category::TvUhdEpisodes])
     ///                          .sort_by(SortBy::Seeders)
-    ///                          .minimum_seeders(42)
+    ///                          .minimum_seeders(1337)
     ///                          .minimum_leechers(42)
     ///                          .format(Format::JsonExtended)
     ///                          .build();
+    /// assert_eq!(*ap.ranked(), false);
+    /// assert_eq!(*ap.limit(), Limit::OneHundred);
+    /// assert_eq!(*ap.categories().unwrap(), vec![Category::TvHdEpisodes, Category::TvUhdEpisodes]);
+    /// assert_eq!(*ap.sort_by(), SortBy::Seeders);
+    /// assert_eq!(*ap.minimum_seeders().unwrap(), 1337);
+    /// assert_eq!(*ap.minimum_leechers().unwrap(), 42);
+    /// assert_eq!(*ap.format(), Format::JsonExtended);
     /// ```
     pub fn build(&self) -> ApiParameters {
         ApiParameters {

@@ -157,3 +157,5 @@ src/main.rs
 .idea
 target.nosync
 target
+
+*.magnet

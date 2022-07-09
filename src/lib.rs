@@ -29,7 +29,7 @@ pub mod token;
 pub mod torrent;
 pub mod torrents;
 
-/* The API has a 1req/2s limit. We take three extra second just to be sure. */
+/* The API has a 1req/2s limit. We take three extra seconds just to be sure. */
 const REQUEST_TIME_LIMIT: u64 = 5;
 const USER_AGENT: &str =
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:73.0) Gecko/20100101 Firefox/73.0";
