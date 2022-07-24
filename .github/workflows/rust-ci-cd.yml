@@ -38,7 +38,7 @@ jobs:
         run: |
           echo "::set-output name=VERSION::$(echo $COMMIT_MESSAGE | grep -Po 'v\d+\.\d+\.\d+')"
         id: version
-      - uses: rickstaa/action-create-tag@1ef0869561b8f45faba8b8e29984eb83b054e242 # tag=v1
+      - uses: rickstaa/action-create-tag@e63bce08494380b4ab0193d94936de6fa3a54650 # tag=v1
         name: Create Tag
         env:
           VERSION: $(echo $COMMIT_MESSAGE | grep -Po "v\d+\.\d+\.\d+")
