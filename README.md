@@ -9,7 +9,7 @@
 
 <div align="center">
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/baptistecdr/rarbg_api/Rust-CI-CD) ![Crates.io](https://img.shields.io/crates/v/rarbg_api) ![Crates.io](https://img.shields.io/crates/d/rarbg_api)  ![GitHub](https://img.shields.io/github/license/baptistecdr/rarbg_api)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/baptistecdr/rarbg_api/rust-ci-cd.yml?branch=main) ![Crates.io](https://img.shields.io/crates/v/rarbg_api) ![Crates.io](https://img.shields.io/crates/d/rarbg_api)  ![GitHub](https://img.shields.io/github/license/baptistecdr/rarbg_api)
 
 </div>
 
