@@ -41,8 +41,6 @@ jobs:
         id: version
       - uses: rickstaa/action-create-tag@87a112438ed8b80a2ae25dcf8f11d4949dc4f740 # v1
         name: Create Tag
-        env:
-          VERSION: $(echo $COMMIT_MESSAGE | grep -Po "v\d+\.\d+\.\d+")
         with:
           tag: ${{ steps.version.outputs.VERSION }}
           message: ${{ github.event.head_commit.message }}
