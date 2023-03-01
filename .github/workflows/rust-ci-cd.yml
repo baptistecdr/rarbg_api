@@ -39,7 +39,7 @@ jobs:
           VERSION=$(echo $COMMIT_MESSAGE | grep -Po 'v\d+\.\d+\.\d+')
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
         id: version
-      - uses: rickstaa/action-create-tag@06019d3a86c96bc16d442177e1474cae2353e1fd # v1
+      - uses: rickstaa/action-create-tag@1b2d5ca9b3198a550a1ff92d0ac81256594d34ce # v1
         name: Create Tag
         with:
           tag: ${{ steps.version.outputs.VERSION }}
