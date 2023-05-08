@@ -34,7 +34,7 @@ jobs:
           sed -i "s/^tokio = { version = \".*\",/tokio = { version = \"$TOKIO_VERSION\",/g" README.md
           echo "MAJOR_VERSION=$MAJOR_VERSION" >> $GITHUB_OUTPUT
       - name: Commit, push and create tag
-        uses: EndBug/add-and-commit@b97a9fe893e2984b63d00feaee5922e16ab1cc1e # v9
+        uses: EndBug/add-and-commit@1bad3abcf0d6ec49a5857d124b0bfb52dc7bb081 # v9
         with:
           fetch: true
           default_author: github_actions
@@ -50,7 +50,7 @@ jobs:
           sed -i "s/^rarbg_api = \".*\"$/rarbg_api = \"$DEV_VERSION\"/g" README.md
           echo "DEV_VERSION=$DEV_VERSION" >> $GITHUB_OUTPUT
       - name: Commit and push
-        uses: EndBug/add-and-commit@b97a9fe893e2984b63d00feaee5922e16ab1cc1e # v9
+        uses: EndBug/add-and-commit@1bad3abcf0d6ec49a5857d124b0bfb52dc7bb081 # v9
         with:
           fetch: true
           default_author: github_actions
