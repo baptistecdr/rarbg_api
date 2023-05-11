@@ -25,7 +25,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-rarbg_api = "1.0.42"
+rarbg_api = "1.0.43-rc.1"
 tokio = { version = "1.28.1", features = ["full"] }
 ```
 
