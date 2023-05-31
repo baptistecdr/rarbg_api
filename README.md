@@ -107,3 +107,29 @@ Contributions are welcome!
 Downloading content that you (don't) have might be illegal in your country.
 
 This is an unofficial rust package.
+
+## Archive Reason
+
+RARBG has been shutdown by the administrators.
+
+> Hello guys,
+> 
+> We would like to inform you that we have decided to shut down our site.
+> 
+> The past 2 years have been very difficult for us - some of the people in our team died due to covid complications,
+> 
+> others still suffer the side effects of it - not being able to work at all.
+> 
+> Some are also fighting the war in Europe - ON BOTH SIDES.
+> 
+> Also, the power price increase in data centers in Europe hit us pretty hard.
+> 
+> Inflation makes our daily expenses impossible to bare.
+> 
+> Therefore we can no longer run this site without massive expenses that we can no longer cover out of pocket.
+> 
+> After an unanimous vote we've decided that we can no longer do it.
+> 
+> We are sorry :(
+> 
+> Bye
